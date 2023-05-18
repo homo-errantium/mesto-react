@@ -1,3 +1,5 @@
+import logo from "./images/logo.svg";
+
 function App() {
     return (
         <div className="root">
@@ -6,7 +8,7 @@ function App() {
                     <header className="header">
                         <img
                             className="header__logo"
-                            src="<%=require('./images/logo.svg')%>"
+                            src={logo}
                             alt="Логотип Mesto"
                         />
                     </header>
