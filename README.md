@@ -58,4 +58,13 @@ list of technologies:
 -   webpack5
 -   React
 
+## Installation instructions:
+
+1. Clone the repository
+   `git clone https://github.com/Sonyamaster1/mesto-react`
+2. Install dependencies
+   `npm install`
+3. Run locally
+   `npm start`
+
 Thank you for watching)
