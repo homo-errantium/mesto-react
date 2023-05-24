@@ -1,6 +1,4 @@
 import React from "react";
-import api from "../utils/Api";
-import editAvatar from "../images/btn-edit-avatar.svg";
 import Card from "./Card";
 
 function Main(props) {

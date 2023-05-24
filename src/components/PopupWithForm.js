@@ -1,5 +1,4 @@
 import React from "react";
-// import buttonClose from "../images/btn-close.svg";
 
 function PopupWithForm(props) {
     return (
@@ -9,18 +8,11 @@ function PopupWithForm(props) {
             }`}
         >
             <div className="popup__container">
-                <form
-                    className="popup__form"
-                    name={`${props.formName}`}
-                    // onSubmit={props.onSubmit}
-                >
-                    {/* название формы */}
+                <form className="popup__form" name={`${props.formName}`}>
                     <h2 className="popup__title">{props.title}</h2>
-                    {/* список инпутов */}
 
                     {props.children}
 
-                    {/* кнопка  */}
                     <button type="submit" className="popup__btn-save">
                         {props.buttonText || "Сохранить"}
                     </button>

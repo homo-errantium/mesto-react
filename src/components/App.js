@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from "react";
 import Header from "./Header";
 import Main from "./Main";
@@ -13,7 +12,7 @@ function App() {
     const [isEditProfilePopupOpen, setIsOpenPopupFormEdit] =
         React.useState(false);
     const [isAddPlacePopupOpen, setIsOpenPopupFormAdd] = React.useState(false);
-    const [selectedCard, setSelectedCard] = React.useState(false);
+    const [selectedCard, setSelectedCard] = React.useState(null);
     const [cards, setCards] = React.useState([]);
     const [currentUser, setCurrentUser] = React.useState({});
 
@@ -29,15 +28,15 @@ function App() {
         setIsOpenPopupFormAdd(true);
     }
 
-    function openPopupViewer() {
-        setSelectedCard(true);
+    function openPopupViewer(card) {
+        setSelectedCard(card);
     }
 
     function closeAllPopups() {
         setIsOpenPopupAvatarEdit(false);
         setIsOpenPopupFormEdit(false);
         setIsOpenPopupFormAdd(false);
-        setSelectedCard({});
+        setSelectedCard(false);
     }
 
     React.useEffect(() => {
@@ -69,7 +68,6 @@ function App() {
                         isOpen={isAddPlacePopupOpen}
                         formName="placeData"
                         onClose={closeAllPopups}
-                        // onSubmit={handleAddPlaceSubmit}
                         title="Новое место"
                         buttonText="Создать"
                     >
@@ -101,7 +99,6 @@ function App() {
                         isOpen={isEditProfilePopupOpen}
                         formName="profileData"
                         onClose={closeAllPopups}
-                        // onSubmit={handleEditProfileSubmit}
                         title="Редактировать профиль"
                         buttonText="Сохранить"
                     >
@@ -135,7 +132,6 @@ function App() {
                         isOpen={isEditAvatarPopupOpen}
                         formName="placeData"
                         onClose={closeAllPopups}
-                        // onSubmit={handleEditProfileSubmit}
                         title="Обновить аватар"
                         buttonText="Сохранить"
                     >
