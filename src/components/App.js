@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -21,6 +22,7 @@ function App() {
     /*начальное состояние пользователя/карточек*/
     const [currentUser, setCurrentUser] = React.useState({});
     const [cards, setCards] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     /*функции изменения состояний попапов*/
     function openPopupAvatarEdit() {
@@ -84,12 +86,16 @@ function App() {
     }
     /*обнвление данных пользователя*/
     function handleUpdateUser(data) {
+        setIsLoading(true);
         api.setUserInfo(data)
             .then((newUser) => {
                 setCurrentUser(newUser);
                 closeAllPopups();
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
     /*обновление аватара*/
     function handleUpdateAvatar(data) {
@@ -124,38 +130,47 @@ function App() {
             <div className="root">
                 <div className="page">
                     <div className="page__container">
-                        <Header />
-                        <Main
-                            onCardLike={handleCardLike}
-                            onCardDelete={handleCardDelete}
-                            cards={cards}
-                            onEditAvatar={openPopupAvatarEdit}
-                            onEditProfile={handleEditProfileClick}
-                            onAddPlace={openPopupFormAdd}
-                            onCardClick={openPopupViewer}
-                        />
-                        <Footer />
-                        <AddPlacePopup
-                            isOpen={isAddPlacePopupOpen}
-                            onClose={closeAllPopups}
-                            onSubmit={handleAddPlaceSubmit}
-                        />
-                        <EditAvatarPopup
-                            isOpen={isEditAvatarPopupOpen}
-                            onClose={closeAllPopups}
-                            onUpdateAvatar={handleUpdateAvatar}
-                        />
+                        <Routes>
+                            <Route path="/" element={<Header />} />
+                            <Route
+                                path="/main"
+                                element={
+                                    <Main
+                                        onCardLike={handleCardLike}
+                                        onCardDelete={handleCardDelete}
+                                        cards={cards}
+                                        onEditAvatar={openPopupAvatarEdit}
+                                        onEditProfile={handleEditProfileClick}
+                                        onAddPlace={openPopupFormAdd}
+                                        onCardClick={openPopupViewer}
+                                    />
+                                }
+                            />
+                            <Route path="/footer" element={<Footer />} />
 
-                        <EditProfilePopup
-                            isOpen={isEditProfilePopupOpen}
-                            onClose={closeAllPopups}
-                            onUpdateUser={handleUpdateUser}
-                        />
-                        <ImagePopup
-                            isOpen={selectedCard}
-                            card={selectedCard}
-                            onClose={closeAllPopups}
-                        />
+                            <AddPlacePopup
+                                isOpen={isAddPlacePopupOpen}
+                                onClose={closeAllPopups}
+                                onSubmit={handleAddPlaceSubmit}
+                            />
+                            <EditAvatarPopup
+                                isOpen={isEditAvatarPopupOpen}
+                                onClose={closeAllPopups}
+                                onUpdateAvatar={handleUpdateAvatar}
+                            />
+
+                            <EditProfilePopup
+                                isOpen={isEditProfilePopupOpen}
+                                onClose={closeAllPopups}
+                                onUpdateUser={handleUpdateUser}
+                                isLoading={isLoading}
+                            />
+                            <ImagePopup
+                                isOpen={selectedCard}
+                                card={selectedCard}
+                                onClose={closeAllPopups}
+                            />
+                        </Routes>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,14 @@
 import React from "react";
 
 function PopupWithForm(props) {
+    // isLoadingMessage(props.isLoading) {
+    //     if (isLoading === true) {
+    //         this._formElementSubmitButton.textContent = "Сохранение...";
+    //     } else {
+    //         this._formElementSubmitButton.textContent = "Сохранить";
+    //     }
+    // }
+
     return (
         <div
             className={`popup ${props.popupName} ${
